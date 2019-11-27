@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/operator_facilitator.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <link rel="stylesheet" href="./css/pagelist.css">
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/operator_facilitatorpage.js"></script>
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/layer.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo_info">
+            <img src="./images/logo.png" alt="logo">
+            <span class="platform_name">信达</span>
+        </div>
+        <ul class="user_info">
+            <li><a href="operator_product.html"><i class="fa fa-cog fa-fw"></i>服务管理</a></li>
+            <li><a href="operator_orderform.html"><i class="fa fa-cube fa-fw"></i>业务管理</a></li>
+            <li></li>
+            <li style="width: 20px">
+                <img style="height: 40px;width: 40px;padding-top: 5px;" id="logImg" src="./images/default_user.png">
+            </li>
+            <li>
+                <span id="logname">用户名字</span>
+                <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
+                <ul class="dropdown">
+                    <li><a href="#" onclick="seetingdetails()">更改信息</a></li>
+                    <li ><a href="#" onclick="quitLogin()">退出登录</a></li>
+                </ul>
+            </li>
+            <script src="./js/getCookie.js"></script>
+            <script src="./js/quit_login.js"></script>
+            <script src="./js/operator_seeting.js"></script>
+            <script src="./js/logim_img_name.js"></script>
+            <script>
+                InItLogName();
+            </script>
+        </ul>
+    </div>
+    <div class="main">
+        <ul class="main-nav">
+            <li>
+                <a href="operator_orderform.html">
+                    <i class="fa fa-shopping-cart fa-fw"></i>
+                    <p>订单</p>
+                </a>
+            </li>
+            <li>
+                <a href="operator_user.html">
+                    <i class="fa fa-user fa-fw"></i>
+                    <p>用户</p>
+                </a>
+            </li>
+            <li class="bg-red">
+                <a href="operator_facilitator.html">
+                    <i class="fa fa-tasks fa-fw"></i>
+                    <p>服务商</p>
+                </a>
+            </li>
+            <li>
+                <a href="operator_expenses.html">
+                    <i class="fa fa-cny fa-fw"></i>
+                    <p>费用中心</p>
+                </a>
+            </li>
+            <li>
+                <a href="operator_recommend.html">
+                    <i class="fa fa-star fa-fw"></i>
+                    <p>优质推荐</p>
+                </a>
+            </li>
+        </ul>
+        <div class="main-details">
+            <div class="main-top">
+                <ul>
+                    <li>
+                        <i class="fa fa-home fa-fw"></i>
+                    </li>
+                    <li>服务商</li>
+                    <li>/</li>
+                    <li id="status">正常</li>
+                </ul>
+            </div>
+            <ul class="main-tab">
+                <li id="normal" onclick="settab('normal')" class="border-red order1">正常</li>
+                <li id="stop" onclick="settab('stop')" class="order2">停用</li>
+                <li id="via" onclick="settab('via')" class="order2">未通过</li>
+            </ul>
+            <script>
+                function settab(status) {
+                    var normal = document.getElementById("normal");
+                    var stop = document.getElementById("stop");
+                    var via = document.getElementById("via");
+                    if (status=='normal'){
+                        sessionStorage.setItem("status","1");
+                        normal.setAttribute("class","border-red order1");
+                        stop.setAttribute("class","");
+                        via.setAttribute("class","");
+                        $("#status").empty();
+                        $("#status").append("正常");
+                        aonclick('1');
+                    }else if (status=='stop'){
+                        sessionStorage.setItem("status","2");
+                        normal.setAttribute("class","");
+                        stop.setAttribute("class","border-red order1");
+                        via.setAttribute("class","");
+                        $("#status").empty();
+                        $("#status").append("停用");
+                        aonclick('1');
+                    }else {
+                        sessionStorage.setItem("status","0");
+                        normal.setAttribute("class","");
+                        stop.setAttribute("class","");
+                        via.setAttribute("class","border-red order1");
+                        $("#status").empty();
+                        $("#status").append("未通过");
+                        aonclick('1');
+                    }
+                }
+            </script>
+            <div class="main-content">
+                <div class="search">
+                    <input id="word" placeholder="请输入服务商名称查询" /><button onclick="selectName()"><i class="fa fa-search fa-fw"></i></button>
+                </div>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>服务商名称</th>
+                        <th>地区</th>
+                        <th>联系电话</th>
+                        <th>服务商简介</th>
+                        <th>操作</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="productlist" >
+                    <tr>
+                        <td>大唐注册代理事务所</td>
+                        <td>海淀区</td>
+                        <td>13312345678</td>
+                        <td>大唐注册代理事务所，拥有专业、高效的团队，针对个别商标案例进行细致分析和小组探讨。平等对待每一位咨询者，认真查询每一枚商标作为公司的作业准则，并创出特色服务“多对一”商标检索项目，为商标的成功注册提供更精确的多重保障。</td>
+                        <td>
+                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
+                            <span class="handle-btn"><i class="fa fa-circle-o fa-fw"></i>停用</span>
+                        </td>
+                        <td><input class="checkbox" type="checkbox"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table style="width: 100%;">
+                <tbody style="width: 100%">
+                <tr style="width: 100%">
+                    <td align="center" style="width: 100%">
+                        <ul id="pagination" class="pagination" >
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        sessionStorage.setItem("word","");
+        sessionStorage.setItem("status","1");
+        aonclick('1');
+    </script>
+    <script src="./js/operator_facilitator.js"></script>
+</body>
+
+</html>

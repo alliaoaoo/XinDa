@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/operator_orderform.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <link rel="stylesheet" href="./css/pagelist.css">
+    <link rel="stylesheet" href="./css/layer.css">
+
+    <script src="./js/operator_order_getmembername.js"></script>
+    <script src="./js/getCookie.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/operator_orderlist.js"></script>
+    <script src="./js/layer.js"></script>
+</head>
+
+<body>
+<div class="header">
+    <div class="logo_info">
+        <img src="./images/logo.png" alt="logo">
+        <span class="platform_name">信达</span>
+    </div>
+</div>
+<div class="main">
+    <div class="main-details">
+        <ul class="main-tab">
+            <li class="border-red business-order">服务订单</li>
+        </ul>
+        <div class="main-content">
+            <div class="search">
+                <select id="sortStyle" onchange="setStyle()">
+                    <script src="./js/product_sort.js"></script>
+                    <script type="text/javascript">
+                        sortInit("#sortStyle","#sortType");
+                    </script>
+                </select>
+                <input id="word" placeholder="业务订单号" /><button onclick="setword()"><i class="fa fa-search fa-fw"></i></button>
+            </div>
+        </div>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th>业务订单号</th>
+                <th>客户</th>
+                <th>服务名称</th>
+                <th>订单金额</th>
+                <th>创建时间</th>
+                <th>状态</th>
+                <th> </th><th> </th>
+            </tr>
+            </thead>
+            <tbody id="productlist">
+            <tr>
+                <td>S1706080004074530088</td>
+                <td>张三</td>
+                <td>代理记账（一年）*1</td>
+                <td>¥10000.00</td>
+                <td>2019-09-20</td>
+                <td>已支付</td>
+                <td>
+                    <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
+                </td>
+            </tr>
+            <tr>
+                <td>S1706080004074530088</td>
+                <td>李四</td>
+                <td>税务报道*1</td>
+                <td>¥500.00</td>
+                <td>2019-09-20</td>
+                <td>未支付</td>
+                <td>
+                    <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div style=" text-align: center;" class="main-pagination">
+            <ul id="pagination" class="pagination" >
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    sessionStorage.setItem("style","");
+    sessionStorage.setItem("word","");
+    aonclick('1');
+</script>
+</body>
+
+</html>

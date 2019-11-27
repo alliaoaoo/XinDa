@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinda.mapper.ProviderProductMapper" >
+  <resultMap id="BaseResultMap" type="com.xinda.model.ProviderProduct" >
+    <id column="PRODUCT_ID" property="productId" jdbcType="VARCHAR" />
+    <result column="PROVIDER_ID" property="providerId" jdbcType="VARCHAR" />
+    <result column="SERVICE_NAME" property="serviceName" jdbcType="VARCHAR" />
+    <result column="SERVICE_INFO" property="serviceInfo" jdbcType="VARCHAR" />
+    <result column="SERVICE_IMG" property="serviceImg" jdbcType="VARCHAR" />
+    <result column="SERVICE_CONTENT" property="serviceContent" jdbcType="VARCHAR" />
+    <result column="REGION" property="region" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="INTEGER" />
+    <result column="UNIT" property="unit" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="RECOMMEND" property="recommend" jdbcType="INTEGER" />
+    <result column="HIGH_QUALITY" property="highQuality" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="DATE" />
+    <result column="STAR" property="star" jdbcType="INTEGER" />
+    <result column="style_id" property="styleId" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="store_num" property="storeNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PRODUCT_ID, PROVIDER_ID, SERVICE_NAME, SERVICE_INFO, SERVICE_IMG, SERVICE_CONTENT, 
+    REGION, PRICE, UNIT, STATUS, RECOMMEND, HIGH_QUALITY, CREATE_TIME, STAR, style_id, 
+    type_id, store_num
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinda.model.ProviderProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from provider_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from provider_product
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from provider_product
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xinda.model.ProviderProductExample" >
+    delete from provider_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xinda.model.ProviderProduct" >
+    insert into provider_product (PRODUCT_ID, PROVIDER_ID, SERVICE_NAME, 
+      SERVICE_INFO, SERVICE_IMG, SERVICE_CONTENT, 
+      REGION, PRICE, UNIT, 
+      STATUS, RECOMMEND, HIGH_QUALITY, 
+      CREATE_TIME, STAR, style_id, 
+      type_id, store_num)
+    values (#{productId,jdbcType=VARCHAR}, #{providerId,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, 
+      #{serviceInfo,jdbcType=VARCHAR}, #{serviceImg,jdbcType=VARCHAR}, #{serviceContent,jdbcType=VARCHAR}, 
+      #{region,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{recommend,jdbcType=INTEGER}, #{highQuality,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=DATE}, #{star,jdbcType=INTEGER}, #{styleId,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=VARCHAR}, #{storeNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinda.model.ProviderProduct" >
+    insert into provider_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        PRODUCT_ID,
+      </if>
+      <if test="providerId != null" >
+        PROVIDER_ID,
+      </if>
+      <if test="serviceName != null" >
+        SERVICE_NAME,
+      </if>
+      <if test="serviceInfo != null" >
+        SERVICE_INFO,
+      </if>
+      <if test="serviceImg != null" >
+        SERVICE_IMG,
+      </if>
+      <if test="serviceContent != null" >
+        SERVICE_CONTENT,
+      </if>
+      <if test="region != null" >
+        REGION,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="unit != null" >
+        UNIT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="recommend != null" >
+        RECOMMEND,
+      </if>
+      <if test="highQuality != null" >
+        HIGH_QUALITY,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="star != null" >
+        STAR,
+      </if>
+      <if test="styleId != null" >
+        style_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="storeNum != null" >
+        store_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null" >
+        #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfo != null" >
+        #{serviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceImg != null" >
+        #{serviceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceContent != null" >
+        #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=INTEGER},
+      </if>
+      <if test="highQuality != null" >
+        #{highQuality,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="star != null" >
+        #{star,jdbcType=INTEGER},
+      </if>
+      <if test="styleId != null" >
+        #{styleId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeNum != null" >
+        #{storeNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xinda.model.ProviderProductExample" resultType="java.lang.Integer" >
+    select count(*) from provider_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update provider_product
+    <set >
+      <if test="record.productId != null" >
+        PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.providerId != null" >
+        PROVIDER_ID = #{record.providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceName != null" >
+        SERVICE_NAME = #{record.serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceInfo != null" >
+        SERVICE_INFO = #{record.serviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceImg != null" >
+        SERVICE_IMG = #{record.serviceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceContent != null" >
+        SERVICE_CONTENT = #{record.serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.region != null" >
+        REGION = #{record.region,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        PRICE = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.unit != null" >
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.recommend != null" >
+        RECOMMEND = #{record.recommend,jdbcType=INTEGER},
+      </if>
+      <if test="record.highQuality != null" >
+        HIGH_QUALITY = #{record.highQuality,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.star != null" >
+        STAR = #{record.star,jdbcType=INTEGER},
+      </if>
+      <if test="record.styleId != null" >
+        style_id = #{record.styleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null" >
+        type_id = #{record.typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeNum != null" >
+        store_num = #{record.storeNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update provider_product
+    set PRODUCT_ID = #{record.productId,jdbcType=VARCHAR},
+      PROVIDER_ID = #{record.providerId,jdbcType=VARCHAR},
+      SERVICE_NAME = #{record.serviceName,jdbcType=VARCHAR},
+      SERVICE_INFO = #{record.serviceInfo,jdbcType=VARCHAR},
+      SERVICE_IMG = #{record.serviceImg,jdbcType=VARCHAR},
+      SERVICE_CONTENT = #{record.serviceContent,jdbcType=VARCHAR},
+      REGION = #{record.region,jdbcType=VARCHAR},
+      PRICE = #{record.price,jdbcType=INTEGER},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      RECOMMEND = #{record.recommend,jdbcType=INTEGER},
+      HIGH_QUALITY = #{record.highQuality,jdbcType=INTEGER},
+      CREATE_TIME = #{record.createTime,jdbcType=DATE},
+      STAR = #{record.star,jdbcType=INTEGER},
+      style_id = #{record.styleId,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=VARCHAR},
+      store_num = #{record.storeNum,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinda.model.ProviderProduct" >
+    update provider_product
+    <set >
+      <if test="providerId != null" >
+        PROVIDER_ID = #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceInfo != null" >
+        SERVICE_INFO = #{serviceInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceImg != null" >
+        SERVICE_IMG = #{serviceImg,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceContent != null" >
+        SERVICE_CONTENT = #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        REGION = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null" >
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="recommend != null" >
+        RECOMMEND = #{recommend,jdbcType=INTEGER},
+      </if>
+      <if test="highQuality != null" >
+        HIGH_QUALITY = #{highQuality,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="star != null" >
+        STAR = #{star,jdbcType=INTEGER},
+      </if>
+      <if test="styleId != null" >
+        style_id = #{styleId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeNum != null" >
+        store_num = #{storeNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinda.model.ProviderProduct" >
+    update provider_product
+    set PROVIDER_ID = #{providerId,jdbcType=VARCHAR},
+      SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      SERVICE_INFO = #{serviceInfo,jdbcType=VARCHAR},
+      SERVICE_IMG = #{serviceImg,jdbcType=VARCHAR},
+      SERVICE_CONTENT = #{serviceContent,jdbcType=VARCHAR},
+      REGION = #{region,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=INTEGER},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      RECOMMEND = #{recommend,jdbcType=INTEGER},
+      HIGH_QUALITY = #{highQuality,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=DATE},
+      STAR = #{star,jdbcType=INTEGER},
+      style_id = #{styleId,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      store_num = #{storeNum,jdbcType=INTEGER}
+    where PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+  </update>
+</mapper>

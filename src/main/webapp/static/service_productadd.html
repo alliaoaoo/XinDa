@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/service_product.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <link rel="stylesheet" href="./css/basic-grey.css">
+    <script type="text/javascript" src="./js/Address.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/product_sort.js"></script>
+    <script src="./js/productadd.js"></script>
+    <script src="./js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/sweetalert.css">
+    <script src="./js/productadd.js"></script>
+    <script src="./js/getCookie.js"></script>
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/layer.js"></script>
+    <script src="./js/check.js"></script>
+    <script>
+
+        function show(file){
+            var reader = new FileReader();	// 实例化一个FileReader对象，用于读取文件
+            var img = document.getElementById('showimg'); 	// 获取要显示图片的标签
+
+            //读取File对象的数据
+            reader.onload = function(evt){
+                img.width  =  "100";
+                img.height =  "60";
+                img.src = evt.target.result;
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+    </script>
+</head>
+
+<body>
+<div class="header">
+    <div class="logo_info">
+        <img src="./images/logo.png" alt="logo">
+        <span class="platform_name">信达</span>
+    </div>
+    <ul class="user_info">
+        <li><a href="service_product.html"><i class="fa fa-cog fa-fw"></i>服务管理</a></li>
+        <li onclick="messorderlist()" id="ordersum"><i class="fa fa-shopping-cart fa-fw"></i>新订单(0)</li>
+        <li onclick="messlist()" id="messlist"><i  class="fa fa-bell-o fa-fw"></i>通知(0)</li>
+        <script src="./js/service_message.js"></script>
+        <script>
+            setmesssum();
+            setordersum();
+        </script>
+        <li></li>
+        <li style="width: 20px">
+            <img style="height: 40px;width: 40px;padding-top: 5px;" id="logImg" src="./images/default_user.png">
+        </li>
+        <li>
+            <span id="logname">用户名字</span>
+            <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
+            <ul class="dropdown">
+                <li><a href="./service_setting.html">更改信息</a></li>
+                <li ><a href="#" onclick="quitLogin()">退出登录</a></li>
+            </ul>
+        </li>
+        <script src="./js/logim_img_name.js"></script>
+        <script type="text/javascript">
+            InItLogName();
+        </script>
+    </ul>
+</div>
+<div class="main">
+    <ul class="main-nav">
+        <li>
+            <a href="service_product.html">
+                <i class="fa fa-home fa-fw"></i>
+                <p>主页</p>
+            </a>
+        </li>
+        <li>
+            <a href="service_orderform.html">
+                <i class="fa fa-shopping-cart fa-fw"></i>
+                <p>订单</p>
+            </a>
+        </li>
+        <li>
+            <a href="service_expenses.html">
+                <i class="fa fa-cny fa-fw"></i>
+                <p>费用</p>
+            </a>
+        </li>
+        <li>
+            <a href="service_store.html">
+                <i class="fa fa-institution fa-fw"></i>
+                <p>店铺</p>
+            </a>
+        </li>
+        <li>
+            <a href="service_setting.html">
+                <i class="fa fa-cog fa-fw"></i>
+                <p>设置</p>
+            </a>
+        </li>
+    </ul>
+    <div class="main-details">
+        <div class="main-top">
+            <ul>
+                <li>
+                    <i class="fa fa-home fa-fw"></i>
+                </li>
+                <li>增加服务</li>
+            </ul>
+        </div>
+
+        <div class="basic-grey">
+
+        <form action="" id="productform" method="post" enctype="multipart/form-data" >
+            <h1>增加服务产品
+                <span>请输入服务信息.</span>
+            </h1>
+
+            <label>
+                <span>服务名称 :</span>
+                <input id="name" onblur="validateNonEmpty('name','请输入服务名称')"  type="text" name="serviceName" placeholder="服务产品全名" />
+            </label>
+
+            <label>
+                <span>简介 :</span>
+                <textarea id="intro" onblur="validateNonEmpty('intro','请输入服务简介')"  style="height: 50px" name="serviceInfo" placeholder="服务产品简介"></textarea>
+
+            </label>
+
+            <label>
+                <span>服务内容 :</span>
+                <textarea id="message" onblur="validateNonEmpty('message','请输入服务内容')" name="serviceContent" placeholder="服务产品详细内容"></textarea>
+            </label>
+
+            <label>
+                <table class="table_add">
+                    <tr>
+                        <td style="width: 55px"><span style="float: left">图片 :</span></td>
+                        <td style="width: 130px"><input id="file-id" name="file" accept=".gif,.jpg,.png,.bmp,.jpeg,.psd" type="file" onchange="show(this)"></td>
+                        <td></td>
+                        <td><img src="" id="showimg"/></td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" style="width: 55px;"><span style="float: left; ">价格 : </span></td>
+                        <td style="width: 130px;"><input style="float: left" id="price" type="text" name="price"
+                        onblur="checkRate('price')"   placeholder="服务价格"></td>
+
+                        <td valign="middle" style="width: 55px;"><span style="float: left; ">库存 : </span></td>
+                        <td style="width: 130px;"><input style="float: left" id="storeNum" type="text" name="storeNum"
+                         onblur="checkRate('storeNum')"   placeholder="服务库存"/></td>
+
+                        <td style="width: 55px"><span style="float: left">单位 :</span></td>
+                        <td style="width: 300px"><input style="float: left" id="unit" type="text" name="unit"
+                          onblur="validateNonEmpty('unit','请输入单位名称')"  placeholder="单位名称"/></td>
+                    </tr>
+                </table>
+            </label>
+
+        </form>
+
+
+            <label>
+
+                <table class="table_add">
+                    <tbody valign="middle">
+                    <tr>
+                        <td style="width: 55px"><span style="float: left">地区 :</span></td>
+                        <td style="width: 130px"><select style="float: left" id="cmbProvince"></select></td>
+                        <td style="width: 130px"><select id="cmbCity"></select></td>
+                        <td style="width: 130px"><select id="cmbArea"></select></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <script type="text/javascript">
+                    addressInit('cmbProvince', 'cmbCity', 'cmbArea', '省', '市', '县');
+                </script>
+
+            </label>
+
+
+            <label>
+                <table class="table_add">
+                    <tbody valign="middle">
+                    <tr>
+                        <td style="width: 55px"><span style="float: left">划分：</span></td>
+                        <td style="width: 130px">
+                            <select id="sortStyle">
+                                <option value="1">--选择服务类型</option>
+                                <option value="2">选择服务类型1</option>
+                                <option value="3">选择服务类型2</option>
+                                <option value="4">选择服务类型3</option>
+                            </select>
+                        </td>
+                        <td style="width: 130px">
+                            <select id="sortType">
+                                <option value="">--选择服务分类</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </label>
+
+            <script type="text/javascript">
+                sortInit("#sortStyle", "#sortType");
+            </script>
+
+            <label>
+                <span>&nbsp;</span>
+                <input type="button" class="button" value="send" onclick="send('/product/add','添加服务','确定添加服务？')"/>
+            </label>
+        </div>
+        <div id="testDiv"></div>
+
+    </div>
+</div>
+<script src="./js/service_product.js"></script>
+
+
+
+</body>
+
+</html>

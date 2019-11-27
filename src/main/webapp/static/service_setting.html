@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/service_setting.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <script src="./js/quit_login.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/Address.js"></script>
+    <script src="./js/service_InItSeeting.js"></script>
+    <script src="./js/seeting_update.js"></script>
+    <script src="./js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/sweetalert.css">
+    <script src="./js/getCookie.js"></script>
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/layer.js"></script>
+    <script src="./js/check.js"></script>
+    <script>
+        function show(file){
+            var reader = new FileReader();	// 实例化一个FileReader对象，用于读取文件
+            var img = document.getElementById('showimg'); 	// 获取要显示图片的标签
+            //读取File对象的数据
+            reader.onload = function(evt){
+                img.width  =  "80";
+                img.height =  "80";
+                img.src = evt.target.result;
+            };
+            reader.readAsDataURL(file.files[0]);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo_info">
+            <img src="./images/logo.png" alt="logo">
+            <span class="platform_name">信达</span>
+        </div>
+        <ul class="user_info">
+            <li><a href="service_product.html"><i class="fa fa-cog fa-fw"></i>服务管理</a></li>
+            <li onclick="messorderlist()" id="ordersum"><i class="fa fa-shopping-cart fa-fw"></i>新订单(0)</li>
+            <li onclick="messlist()" id="messlist"><i  class="fa fa-bell-o fa-fw"></i>通知(0)</li>
+            <script src="./js/service_message.js"></script>
+            <script>
+                setmesssum();
+                setordersum();
+            </script>
+            <li></li>
+            <li style="width: 20px">
+                <img style="height: 40px;width: 40px;padding-top: 5px;" id="logImg" src="./images/default_user.png">
+            </li>
+            <li>
+                <span id="logname">用户名字</span>
+                <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
+                <ul class="dropdown">
+                    <li><a href="./service_setting.html">更改信息</a></li>
+                    <li ><a href="#" onclick="quitLogin()">退出登录</a></li>
+                </ul>
+            </li>
+            <script src="./js/logim_img_name.js"></script>
+            <script type="text/javascript">
+                InItLogName();
+            </script>
+        </ul>
+    </div>
+    <div class="main">
+        <ul class="main-nav">
+            <li>
+                <a href="service_product.html">
+                    <i class="fa fa-home fa-fw"></i>
+                    <p>主页</p>
+                </a>
+            </li>
+            <li>
+                <a href="service_orderform.html">
+                    <i class="fa fa-shopping-cart fa-fw"></i>
+                    <p>订单</p>
+                </a>
+            </li>
+            <li>
+                <a href="service_expenses.html">
+                    <i class="fa fa-cny fa-fw"></i>
+                    <p>费用</p>
+                </a>
+            </li>
+            <li>
+                <a href="service_store.html">
+                    <i class="fa fa-institution fa-fw"></i>
+                    <p>店铺</p>
+                </a>
+            </li>
+            <li class="bg-red">
+                <a href="service_setting.html">
+                    <i class="fa fa-cog fa-fw"></i>
+                    <p>设置</p>
+                </a>
+            </li>
+        </ul>
+        <div class="main-details">
+            <div class="main-top">
+                <ul>
+                    <li>
+                        <i class="fa fa-home fa-fw"></i>
+                    </li>
+                    <li>设置</li>
+                </ul>
+            </div>
+            <ul class="main-tab">
+                <li class="border-red order1">服务商信息</li>
+            </ul>
+            <div class="main-content">
+                <div class="avatars">
+                </div>
+                <form id="seetingform" method="post" enctype="multipart/form-data" >
+                <ul class="store-info">
+                    <li>
+                        <img id="showimg" style="width: 80px;height: 80px" src="" alt="用户头像">
+                        <br>
+                        <input id="file-id" style="width: 70px"  name="file" accept=".gif,.jpg,.png,.bmp,.jpeg,.psd" type="file" onchange="show(this)">
+
+                    </li>
+                    <li>
+                        <span>登录ID</span>
+                        <input id="loginId" name="loginId" type="text" style="height: 20px" value="">
+                    </li>
+                    <li>
+                        <span>登录密码</span>
+                        <input id="password" name="password" style="height: 20px" type="password">
+                    </li>
+                    <li>
+                        <span >服务商名称</span>
+                        <input id="name" onblur="validateNonEmpty('name','服务商名字不可空')" name="name" style="height: 20px" value="云智汇咨询服务有限公司">
+                    </li>
+                    <li>
+                        <span>手机号</span>
+                        <input name="cellphone" onblur="checkPhone('cellphone')" id="cellphone" style="height: 20px" value="1800000000">
+                    </li>
+                    <li>
+                        <span>微信</span>
+                        <input id="weixin" name="weixin" style="height: 20px" value="">
+
+                    </li>
+                    <li>
+                        <span>QQ</span>
+                        <input id="qq" name="qq" onblur="chechqq('qq')" style="height: 20px" value="114521212">
+
+                    </li>
+                    <li>
+                        <span>邮箱</span>
+                        <input id="email" onblur="checkeamil('email')" name="email" style="height: 20px" value="云智汇咨询服务有限公司">
+                    </li>
+                    <li>
+                        <span>地区</span>
+                        <select style="width: 63px" name="" id="cmbProvince">
+                            <option value="">省</option>
+                        </select>
+                        <select style="width: 63px" name="" id="cmbCity">
+                            <option value="">市</option>
+                        </select>
+                        <select style="width: 63px" name="" id="cmbArea">
+                            <option value="">区</option>
+                        </select>
+                    </li>
+                    <script type="text/javascript">
+                        InItSeeting();
+                    </script>
+                    <li>
+                        <input type="button" value="修改" onclick="setlogin('#seetingform')">
+                    </li>
+                </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./js/service_setting.js"></script>
+</body>
+
+</html>

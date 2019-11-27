@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/service_product.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <link rel="stylesheet" href="./css/basic-grey.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/productadd.js"></script>
+    <script src="./js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/sweetalert.css">
+    <script src="./js/getCookie.js"></script>
+
+</head>
+
+<body>
+<div class="main">
+    <div class="main-details">
+
+        <div class="basic-grey">
+                <label>
+                    <span>服务名称 :</span>
+                    <input id="name" type="text" name="serviceName" placeholder="服务产品全名"/>
+                </label>
+
+                <label>
+                    <span>简介 :</span>
+                    <textarea id="intro" style="height: 50px" name="serviceInfo" placeholder="服务产品简介"></textarea>
+
+                </label>
+
+                <label>
+                    <span>服务内容 :</span>
+                    <textarea id="message" name="serviceContent" placeholder="服务产品详细内容"></textarea>
+                </label>
+
+                <label>
+                    <span>图片</span>
+                    <img src="" style="width:100px;height:60px;" id="showimg"/>
+                </label>
+            <label>
+                <span style="float: left; ">价格 : </span>
+                <input style="width: 130px" id="price" type="text"  name="price"placeholder="服务价格"/>
+            </label>
+            <label>
+                <span style="float: left; ">库存 : </span>
+                <input style="width: 130px" id="storeNum" type="text" name="storeNum"placeholder="服务库存"/>
+            </label>
+            <label>
+                <span style="float: left">单位 :</span>
+                <input style="width: 130px" id="unit" type="text" name="unit" placeholder="单位名称"/>
+            </label>
+
+            <label>
+                <span style="float: left">地区 :</span>
+                <input style="width: 180px" id="region" value="">
+                <br>
+
+            </label>
+        </div>
+        <div id="testDiv"></div>
+
+    </div>
+</div>
+<script src="./js/getCookie.js"></script>
+<script type="text/javascript">
+
+    var productId = getCookie("productId");
+    // alert(sessionStorage.getItem(""));
+    $.ajax({
+        url:"/product/getproduct",
+        data:{"productId":productId},
+        dataType:"json",
+        type:"get",
+        success:function (data) {
+            var name =document.getElementById("name");
+            name.value=data.serviceName;
+            var intro = document.getElementById("intro");
+            intro.value=data.serviceInfo;
+            var message = document.getElementById("message");
+            message.value = data.serviceContent;
+            var showimg = document.getElementById("showimg");
+            if (data.serviceImg!=null){
+                showimg.setAttribute("src",data.serviceImg);
+            }
+            var price = document.getElementById("price");
+            price.value = data.price;
+            var storeNum = document.getElementById("storeNum");
+            storeNum.value=data.storeNum;
+            var unit = document.getElementById("unit");
+            unit.value=data.unit;
+            var region = document.getElementById("region");
+            region.value=data.region;
+        }
+    })
+</script>
+
+</body>
+
+</html>

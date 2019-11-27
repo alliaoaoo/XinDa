@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/operator_orderform.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <link rel="stylesheet" href="./css/pagelist.css">
+    <link rel="stylesheet" href="./css/layer.css">
+
+    <script src="./js/operator_order_getmembername.js"></script>
+    <script src="./js/getCookie.js"></script>
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/operator_orderlist.js"></script>
+    <script src="./js/layer.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo_info">
+            <img src="./images/logo.png" alt="logo">
+            <span class="platform_name">信达</span>
+        </div>
+        <ul class="user_info">
+            <li><a href="operator_product.html"><i class="fa fa-cog fa-fw"></i>服务管理</a></li>
+            <li><a href="operator_orderform.html"><i class="fa fa-cube fa-fw"></i>业务管理</a></li>
+            <li></li>
+            <li style="width: 20px">
+                <img style="height: 40px;width: 40px;padding-top: 5px;" id="logImg" src="./images/default_user.png">
+            </li>
+            <li>
+                <span id="logname">用户名字</span>
+                <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
+                <ul class="dropdown">
+                    <li><a href="#" onclick="seetingdetails()">更改信息</a></li>
+                    <li ><a href="#" onclick="quitLogin()">退出登录</a></li>
+                </ul>
+            </li>
+            <script src="./js/quit_login.js"></script>
+            <script src="./js/operator_seeting.js"></script>
+            <script src="./js/logim_img_name.js"></script>
+            <script>
+                InItLogName();
+            </script>
+        </ul>
+    </div>
+    <div class="main">
+        <ul class="main-nav">
+            <li class="bg-red">
+                <a href="operator_orderform.html">
+                    <i class="fa fa-shopping-cart fa-fw"></i>
+                    <p>订单</p>
+                </a>
+            </li>
+            <li>
+                <a href="operator_user.html">
+                    <i class="fa fa-user fa-fw"></i>
+                    <p>用户</p>
+                </a>
+            </li>
+            <li>
+                <a href="operator_facilitator.html">
+                    <i class="fa fa-tasks fa-fw"></i>
+                    <p>服务商</p>
+                </a>
+            </li>
+            <li>
+                <a href="operator_expenses.html">
+                    <i class="fa fa-cny fa-fw"></i>
+                    <p>费用中心</p>
+                </a>
+            </li>
+            <li>
+                <a href="operator_recommend.html">
+                    <i class="fa fa-star fa-fw"></i>
+                    <p>优质推荐</p>
+                </a>
+            </li>
+        </ul>
+        <div class="main-details">
+            <div class="main-top">
+                <ul>
+                    <li>
+                        <i class="fa fa-home fa-fw"></i>
+                    </li>
+                    <li>订单</li>
+                    <li>/</li>
+                    <li>服务订单</li>
+                </ul>
+            </div>
+            <ul class="main-tab">
+                <li class="border-red business-order">服务订单</li>
+            </ul>
+            <div class="main-content">
+                <div class="search">
+                    <select id="sortStyle" onchange="setStyle()">
+                        <script src="./js/product_sort.js"></script>
+                        <script type="text/javascript">
+                            sortInit("#sortStyle","#sortType");
+                        </script>
+                    </select>
+                    <input id="word" placeholder="业务订单号" /><button onclick="setword()"><i class="fa fa-search fa-fw"></i></button>
+                </div>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>业务订单号</th>
+                        <th>客户</th>
+                        <th width="40%">服务名称</th>
+                        <th>订单金额</th>
+                        <th>创建时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="productlist">
+                    <tr>
+                        <td>S1706080004074530088</td>
+                        <td>张三</td>
+                        <td>代理记账（一年）*1</td>
+                        <td>¥10000.00</td>
+                        <td>2019-09-20</td>
+                        <td>已支付</td>
+                        <td>
+                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>S1706080004074530088</td>
+                        <td>李四</td>
+                        <td>税务报道*1</td>
+                        <td>¥500.00</td>
+                        <td>2019-09-20</td>
+                        <td>未支付</td>
+                        <td>
+                            <span class="handle-btn"><i class="fa fa-edit fa-fw"></i>详情</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style=" text-align: center;" class="main-pagination">
+                <ul id="pagination" class="pagination" >
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        sessionStorage.setItem("style","");
+        sessionStorage.setItem("word","");
+        document.cookie="memberId="+"";
+        aonclick('1');
+    </script>
+    <script src="./js/operator_orderform.js"></script>
+</body>
+
+</html>

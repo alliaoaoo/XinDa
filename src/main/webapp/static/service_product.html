@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/service_product.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <script src="./js/product_sort.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="./css/pagelist.css">
+    <script src="./js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/sweetalert.css">
+    <script src="./js/product_list.js"></script>
+    <script src="./js/service_edit.js"></script>
+    <script src="./js/getCookie.js"></script>
+    <script src="./js/quit_login.js"></script>
+    <script src="./js/type_product.js"></script>
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/layer.js"></script>
+
+</head>
+
+<body>
+<div class="header">
+    <div class="logo_info">
+        <img src="./images/logo.png" alt="logo">
+        <span class="platform_name">信达</span>
+    </div>
+    <ul class="user_info">
+        <li><a href="service_product.html"><i class="fa fa-cog fa-fw"></i>服务管理</a></li>
+        <li onclick="messorderlist()" id="ordersum"><i class="fa fa-shopping-cart fa-fw"></i>新订单(0)</li>
+        <li onclick="messlist()" id="messlist"><i  class="fa fa-bell-o fa-fw"></i>通知(0)</li>
+        <script src="./js/service_message.js"></script>
+        <script>
+            setmesssum();
+            setordersum();
+        </script>
+
+        <li></li>
+        <li style="width: 20px">
+            <img style="height: 40px;width: 40px;padding-top: 5px;" id="logImg" src="./images/default_user.png">
+        </li>
+        <li>
+            <span id="logname">用户名字</span>
+            <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
+            <ul class="dropdown">
+                <li><a href="./service_setting.html">更改信息</a></li>
+                <li ><a href="#" onclick="quitLogin()">退出登录</a></li>
+            </ul>
+        </li>
+        <script src="./js/logim_img_name.js"></script>
+        <script type="text/javascript">
+            InItLogName();
+        </script>
+    </ul>
+</div>
+<div class="main">
+    <ul class="main-nav">
+        <li>
+            <a href="service_product.html">
+                <i class="fa fa-home fa-fw"></i>
+                <p>主页</p>
+            </a>
+        </li>
+        <li>
+            <a href="service_orderform.html">
+                <i class="fa fa-shopping-cart fa-fw"></i>
+                <p>订单</p>
+            </a>
+        </li>
+        <li>
+            <a href="service_expenses.html">
+                <i class="fa fa-cny fa-fw"></i>
+                <p>费用</p>
+            </a>
+        </li>
+        <li>
+            <a href="service_store.html">
+                <i class="fa fa-institution fa-fw"></i>
+                <p>店铺</p>
+            </a>
+        </li>
+        <li>
+            <a href="service_setting.html">
+                <i class="fa fa-cog fa-fw"></i>
+                <p>设置</p>
+            </a>
+        </li>
+    </ul>
+    <div class="main-details">
+        <div class="main-top">
+            <ul>
+                <li>
+                    <i class="fa fa-home fa-fw"></i>
+                </li>
+                <li>服务管理</li>
+            </ul>
+        </div>
+        <ul class="main-tab">
+            <li class="border-red business-order">产品列表</li>
+        </ul>
+        <div class="main-content">
+            <div class="search">
+                <select id="sortStyle" onchange="getList('#productlist','#pagination')">
+                    <option value="">--选择服务类型</option>
+                    <option value="">选择服务类型1</option>
+                    <option value="">选择服务类型2</option>
+                    <option value="">选择服务类型3</option>
+                </select>
+                <select id="sortType" onchange="getList('#productlist','#pagination')">
+                    <option value="">--选择服务分类</option>
+                </select>
+                <input id="word" name="word" placeholder="服务名称" type="text"/>
+                <button onclick="aonclick('1')"><i class="fa fa-search fa-fw"></i></button>
+            </div>
+            <script type="text/javascript">
+                sortInit("#sortStyle","#sortType");
+            </script>
+            <div class="product-action">
+                <span class="add-product-action"><a style="color: #F2F8FE" href="./service_productadd.html"><i class="fa fa-plus fa-fw"></i>添加服务产品</a></span>
+            </div>
+        </div>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th>服务名称</th>
+                <th>服务内容</th>
+                <th>价格</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <p id="js_addlist">
+                <script  type="text/javascript">
+                    aonclick('1');
+                </script>
+            </p>
+            <tbody id="productlist">
+
+
+            </tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><span class="down-line-mark down-line-mark-orange"></span></td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td align="center" style="width: 100px">
+                    <ul id="pagination" class="pagination" >
+                    </ul>
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<script src="./js/service_product.js"></script>
+</body>
+
+</html>

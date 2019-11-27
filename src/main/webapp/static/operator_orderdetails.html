@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/service_product.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <link rel="stylesheet" href="./css/basic-grey.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/productadd.js"></script>
+    <script src="./js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/sweetalert.css">
+    <script src="./js/getCookie.js"></script>
+
+</head>
+
+<body>
+<div class="main">
+    <div class="main-details">
+
+        <div class="basic-grey">
+            <label>
+                <span>服务名称 :</span>
+                <input id="name" type="text" name="serviceName" placeholder="服务产品全名"/>
+            </label>
+
+            <label>
+                <span>简介 :</span>
+                <textarea id="intro" style="height: 50px" name="serviceInfo" placeholder="服务产品简介"></textarea>
+
+            </label>
+
+            <label>
+                <span>服务内容 :</span>
+                <textarea id="message" name="serviceContent" placeholder="服务产品详细内容"></textarea>
+            </label>
+
+            <label>
+                <span style="float: left; ">服务商 : </span>
+                <input style="width: 130px" id="providername" type="text"/>
+            </label>
+
+            <label>
+                <span style="float: left; ">服务商联系方式 : </span>
+                <input style="width: 130px" id="cellphone" type="text"/>
+            </label>
+
+            <label>
+                <span style="float: left; ">客户联系方式 : </span>
+                <input style="width: 130px" id="memberphone" type="text"/>
+            </label>
+
+            <label>
+                <span style="float: left; ">处理时间 : </span>
+                <input style="width: 130px" id="endtime" type="text"/>
+            </label>
+
+
+        </div>
+        <div id="testDiv"></div>
+
+    </div>
+</div>
+<script src="./js/getCookie.js"></script>
+<script type="text/javascript">
+
+    var orderId = getCookie("orderId");
+    $.ajax({
+        url:"/order/getorderotherattr",
+        data:{"orderId":orderId},
+        dataType:"json",
+        type:"get",
+        success:function (data) {
+            var name =document.getElementById("name");
+            name.value=data.serviceName;
+            var intro = document.getElementById("intro");
+            intro.value=data.serviceInfo;
+            var message = document.getElementById("message");
+            message.value = data.serviceText;
+            var providername = document.getElementById("providername");
+            providername.value=data.providerName;
+            var price = document.getElementById("cellphone");
+            price.value = data.providerPhone;
+            var endtime = document.getElementById("endtime");
+            if (data.handletime!=""){
+                endtime.value=data.handletime;
+            }
+            else {
+                endtime.value="无";
+            }
+            var memberphone = document.getElementById("memberphone");
+            memberphone.value=data.memberphone;
+        }
+    })
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinda.mapper.ServiceOrderProgressMapper" >
+  <resultMap id="BaseResultMap" type="com.xinda.model.ServiceOrderProgress" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ACCEPT_TIME" property="acceptTime" jdbcType="DATE" />
+    <result column="COMPLETE_TIME" property="completeTime" jdbcType="DATE" />
+    <result column="REQUEST_TIME" property="requestTime" jdbcType="DATE" />
+    <result column="HANDLE_TIME" property="handleTime" jdbcType="DATE" />
+    <result column="DECLINE_REASON" property="declineReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ACCEPT_TIME, COMPLETE_TIME, REQUEST_TIME, HANDLE_TIME, DECLINE_REASON
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinda.model.ServiceOrderProgressExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from service_order_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from service_order_progress
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from service_order_progress
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xinda.model.ServiceOrderProgressExample" >
+    delete from service_order_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xinda.model.ServiceOrderProgress" >
+    insert into service_order_progress (ID, ACCEPT_TIME, COMPLETE_TIME, 
+      REQUEST_TIME, HANDLE_TIME, DECLINE_REASON
+      )
+    values (#{id,jdbcType=VARCHAR}, #{acceptTime,jdbcType=DATE}, #{completeTime,jdbcType=DATE}, 
+      #{requestTime,jdbcType=DATE}, #{handleTime,jdbcType=DATE}, #{declineReason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinda.model.ServiceOrderProgress" >
+    insert into service_order_progress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="acceptTime != null" >
+        ACCEPT_TIME,
+      </if>
+      <if test="completeTime != null" >
+        COMPLETE_TIME,
+      </if>
+      <if test="requestTime != null" >
+        REQUEST_TIME,
+      </if>
+      <if test="handleTime != null" >
+        HANDLE_TIME,
+      </if>
+      <if test="declineReason != null" >
+        DECLINE_REASON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptTime != null" >
+        #{acceptTime,jdbcType=DATE},
+      </if>
+      <if test="completeTime != null" >
+        #{completeTime,jdbcType=DATE},
+      </if>
+      <if test="requestTime != null" >
+        #{requestTime,jdbcType=DATE},
+      </if>
+      <if test="handleTime != null" >
+        #{handleTime,jdbcType=DATE},
+      </if>
+      <if test="declineReason != null" >
+        #{declineReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xinda.model.ServiceOrderProgressExample" resultType="java.lang.Integer" >
+    select count(*) from service_order_progress
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update service_order_progress
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acceptTime != null" >
+        ACCEPT_TIME = #{record.acceptTime,jdbcType=DATE},
+      </if>
+      <if test="record.completeTime != null" >
+        COMPLETE_TIME = #{record.completeTime,jdbcType=DATE},
+      </if>
+      <if test="record.requestTime != null" >
+        REQUEST_TIME = #{record.requestTime,jdbcType=DATE},
+      </if>
+      <if test="record.handleTime != null" >
+        HANDLE_TIME = #{record.handleTime,jdbcType=DATE},
+      </if>
+      <if test="record.declineReason != null" >
+        DECLINE_REASON = #{record.declineReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update service_order_progress
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ACCEPT_TIME = #{record.acceptTime,jdbcType=DATE},
+      COMPLETE_TIME = #{record.completeTime,jdbcType=DATE},
+      REQUEST_TIME = #{record.requestTime,jdbcType=DATE},
+      HANDLE_TIME = #{record.handleTime,jdbcType=DATE},
+      DECLINE_REASON = #{record.declineReason,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinda.model.ServiceOrderProgress" >
+    update service_order_progress
+    <set >
+      <if test="acceptTime != null" >
+        ACCEPT_TIME = #{acceptTime,jdbcType=DATE},
+      </if>
+      <if test="completeTime != null" >
+        COMPLETE_TIME = #{completeTime,jdbcType=DATE},
+      </if>
+      <if test="requestTime != null" >
+        REQUEST_TIME = #{requestTime,jdbcType=DATE},
+      </if>
+      <if test="handleTime != null" >
+        HANDLE_TIME = #{handleTime,jdbcType=DATE},
+      </if>
+      <if test="declineReason != null" >
+        DECLINE_REASON = #{declineReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinda.model.ServiceOrderProgress" >
+    update service_order_progress
+    set ACCEPT_TIME = #{acceptTime,jdbcType=DATE},
+      COMPLETE_TIME = #{completeTime,jdbcType=DATE},
+      REQUEST_TIME = #{requestTime,jdbcType=DATE},
+      HANDLE_TIME = #{handleTime,jdbcType=DATE},
+      DECLINE_REASON = #{declineReason,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

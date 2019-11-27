@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/service_setting.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <script src="./js/quit_login.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/Address.js"></script>
+    <script src="./js/operator_seeting.js"></script>
+    <script src="./js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/sweetalert.css">
+    <script src="./js/getCookie.js"></script>
+
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/layer.js"></script>
+    <script src="./js/check.js"></script>
+    <script>
+        function show(file){
+            var reader = new FileReader();	// 实例化一个FileReader对象，用于读取文件
+            var img = document.getElementById('showimg'); 	// 获取要显示图片的标签
+            //读取File对象的数据
+            reader.onload = function(evt){
+                img.width  =  "80";
+                img.height =  "80";
+                img.src = evt.target.result;
+            };
+            reader.readAsDataURL(file.files[0]);
+        }
+    </script>
+</head>
+
+<body>
+<div class="header">
+    <div class="logo_info">
+        <img src="./images/logo.png" alt="logo">
+        <span class="platform_name">信达</span>
+    </div>
+</div>
+<div class="main">
+    <div class="main-content">
+        <div class="avatars">
+        </div>
+        <form id="seetingform" method="post" enctype="multipart/form-data" >
+            <ul class="store-info">
+                <li>
+                    <img id="showimg" style="width: 80px;height: 80px" src="" alt="用户头像">
+                    <br>
+                    <input id="file-id" style="width: 70px"  name="file" accept=".gif,.jpg,.png,.bmp,.jpeg,.psd" type="file" onchange="show(this)">
+
+                </li>
+                <li>
+                    <span>登录ID</span>
+                    <input id="loginId" name="loginId" type="text" style="height: 20px" value="">
+                </li>
+                <li>
+                    <span>登录密码</span>
+                    <input id="password"  name="password" onblur="validateNonEmpty('password','密码不可空')" style="height: 20px" type="password">
+                </li>
+                <li>
+                    <span >管理员名称</span>
+                    <input id="name" name="userName" onblur="validateNonEmpty('name','管理员名字不可空')" tyle="height: 20px" value="云智汇咨询服务有限公司">
+                </li>
+                <li>
+                    <span>手机号</span>
+                    <input name="cellphone" id="cellphone" onblur="checkPhone('cellphone')" style="height: 20px" value="1800000000">
+                </li>
+                <li>
+                    <span>组织id</span>
+                    <input id="orgId" name="orgId" onblur="validateNonEmpty('orgId','组织id不可空')" style="height: 20px" value="114521212">
+
+                </li>
+                <li>
+                    <span>邮箱</span>
+                    <input id="email" name="email" onblur="checkeamil('email')" style="height: 20px" value="云智汇咨询服务有限公司">
+                </li>
+                <script type="text/javascript">
+                    InItSeeting();
+                </script>
+                <li>
+                    <input type="button" value="修改" onclick="setlogin('#seetingform')">
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>

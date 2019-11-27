@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/e-commerce_shoping-car.css">
+    <script src="./js/e-commerce_cartsort.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/e-commerce_cart_InIt.js"></script>
+    <link rel="stylesheet" href="./css/pagelist.css">
+    <script src="./js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/sweetalert.css">
+
+</head>
+
+<body>
+    <div class="headder-top">
+        <div class="width1200 headder-top-content">
+            <script src="./js/quit_login.js"></script>
+            <script src="./js/getCookie.js"></script>
+            <script src="./js/logim_img_name.js"></script>
+            <div><a href="e-commerce_account.html"><span style="cursor:pointer"  id="logname">xx</span></a>&nbsp;&nbsp;&nbsp;欢迎来到信达！<span style="cursor:pointer" onclick="quitLogin()" class="user-quit">[退出]</span></div>
+            <script type="text/javascript">
+                InItLogName();
+            </script>
+            <ul>
+                <li>
+                    <a href="e-commerce_product.html">首页</a>
+                </li>
+                <li>
+                    <a href="e-commerce_shoping-car.html"><i class="fa fa-shopping-cart fa-lg"></i>
+                    购物车<span id="cartSum">1</span>件</a></li>
+                <script src="./js/e-commerce_cart_sum.js"></script>
+                <script type="text/javascript">
+                    setCartSum();
+                </script>
+                    <a href="e-commerce_order.html">
+                        <i class="fa fa-file-text-o fa-lg"></i> 我的订单
+                    </a>
+
+                </li>
+                <li href="service_login.html">服务商入口</li>
+            </ul>
+        </div>
+    </div>
+    <div class="logo-search width1200">
+        <img class="logo" src="./images/logo-blue.png" />
+        <script src="./js/e-commerce_select.js"></script>
+        <ul class="search">
+            <li >
+                <span id="selectspan1" onclick="setstatus('product')" class="search-product font-aqua">产品</span>丨
+                <span id="selectspan2" onclick="setstatus('provider')" class="search-service">服务商</span>
+            </li>
+            <li>
+                <input id="word" placeholder="搜索您需要的服务或服务商" type="text">
+                <span onclick="selectname()" class="search-btn">
+                <i class="fa fa-search fa-2x"></i></span>
+            </li>
+            <li id="popular">
+                热门服务：<span>社保开户</span> <span>公司注册</span>
+            </li>
+
+            <script src="./js/e-commerce_popular.js"></script>
+            <script>e_popular();</script>
+        </ul>
+        <img class="tel" src="./images/xinda-tel.png" alt="">
+    </div>
+    <ul id="cartSort" class="banner width1200">
+        <li><a  class="border-b">全部</a></li>
+    </ul>
+    <div class="line-aqua">
+
+    </div>
+    <div id="carlist" class="content width1200">
+        <p class="product_num font-aqua">全部商品（1）</p>
+        <hr color="#ededed" size="1">
+        <ul class="product_list_title">
+            <li style="width: 20px"></li>
+            <li>公司</li>
+            <li>服务商品</li>
+            <li>单价</li>
+            <li>数量</li>
+            <li>金额</li>
+            <li>操作</li>
+        </ul>
+        <p class="shop">店铺：云智汇咨询服务有限公司</p>
+        <ul class="merchandise">
+            <input style="width: 20px;height: 20px" type="checkbox">
+            <li>
+                <img src="" alt="图片">
+            </li>
+            <li>个人社保代理（新参统）</li>
+            <li>¥500.00</li>
+            <li>
+                <span>-</span>
+                <input value="1" />
+                <span>+</span>
+            </li>
+            <li>
+                ¥500.00
+            </li>
+            <li>
+                <span>删除</span>
+            </li>
+        </ul>
+        <ul class="merchandise">
+            <input style="width: 20px;height: 20px" type="checkbox">
+            <li>
+                <img src="" alt="图片">
+            </li>
+            <li>个人社保代理（新参统）</li>
+            <li>¥500.00</li>
+            <li>
+                <span>-</span>
+                <input value="1" />
+                <span>+</span>
+            </li>
+            <li>
+                ¥500.00
+            </li>
+            <li>
+                <span>删除</span>
+            </li>
+        </ul>
+        <ul class="price">
+            <li>金额合计<span>¥15000.00</span></li>
+            <li>
+                <a href="e-commerce_product.html">继续购物</a>
+                <a href="e-commerce_settlement.html">去结算</a>
+            </li>
+        </ul>
+        <table>
+            <tr >
+                <td align="center" style="width: 1000px">
+                    <ul id="pagination" class="pagination" >
+
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="./js/e-commerce_shoping-car.js"></script>
+<script type="text/javascript">
+    eCartInIt("#carlist","#pagination");
+</script>
+</body>
+
+</html>

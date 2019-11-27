@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!-- 扫描注解，这样com.xinda包下的文件都能被扫描 -->
+    <context:component-scan base-package="com.xinda"/>
+
+
+    <!--全局拦截器-->
+    <mvc:interceptors>
+        <!-- 多个拦截器 ， 顺序执行-->
+        <mvc:interceptor>
+            <!--/**标识所有url包括子url路径 -->
+            <mvc:mapping path="/**"/>
+            <bean class="com.xinda.interceptor.LoginInterceptor">
+            <!-- 配置放行的请求 bean注入值-->
+            <property name="exceptUrls">
+                <list>
+                    <value>/index.html</value>
+                    <value>/service_login.html</value>
+                    <value>/service_register.html</value>
+                    <value>/service_findpassword.html</value>
+                    <value>/e-commerce_login.html</value>
+                    <value>/e-commerce_register.html</value>
+                    <value>/e-commerce_findpassword.html</value>
+                    <value>/operator_login.html</value>
+                    <value>/operator_findpassword.html</value>
+
+                    <value>/api/captcha</value>
+                    <value>/js/</value>
+                    <value>/css/</value>
+                    <value>/images</value>
+                    <value>/fonts</value>
+                    <value>/provide/login</value>
+                    <value>/product/getSort</value>
+                    <value>/provide/regist</value>
+                    <value>/uploads/</value>
+                    <value>/provide/findpassword</value>
+                    <value>/member/login</value>
+                    <value>/member/regist</value>
+                    <value>/member/findpassword</value>
+                    <value>/admin/login</value>
+                    <value>/admin/findpassword</value>
+                </list>
+            </property>
+            </bean>
+        </mvc:interceptor>
+
+
+    </mvc:interceptors>
+
+    <!-- 开启SpringMVC注解模式 -->
+    <mvc:annotation-driven/>
+
+    <!-- 静态资源默认servlet配置 -->
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/js/**" location="/static/js/"/>
+    <mvc:resources mapping="/css/**" location="/static/css/"/>
+    <mvc:resources mapping="/fonts/**" location="/static/fonts/"/>
+    <mvc:resources mapping="/images/**" location="/static/images/"/>
+    <mvc:resources mapping="/uploads/**" location="/static/uploads/"/>
+    <mvc:resources mapping="/**" location="/static/"/>
+
+
+
+    <!-- 配置返回视图的路径，以及识别后缀是html文件 -->
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+<!--        <property name="prefix" value="/static/"/>-->
+<!--        <property name="suffix" value=".html"/>-->
+<!--    </bean>-->
+
+    <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/static/"/>
+        <property name="suffix" value=".html"/>
+        <property name="characterEncoding" value="UTF-8"/>
+        <property name="order" value="1"/>
+        <property name="templateMode" value="HTML5"/>
+        <property name="cacheable" value="false"/></bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+    <property name="templateResolver" ref="templateResolver"/></bean>
+
+    <bean id="viewResolver" class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+    <property name="templateEngine" ref="templateEngine"/>
+    <property name="characterEncoding" value="UTF-8"/></bean>
+
+<!--    文件解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置默认编码 -->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 上传图片最大大小5M-->
+        <property name="maxUploadSize" value="5242440"/>
+    </bean>
+
+</beans>

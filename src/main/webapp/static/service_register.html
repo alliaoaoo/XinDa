@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/e-commerce_register.css">
+    <script src="./js/Address.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+
+    <script src="./js/layer.js"></script>
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/check.js"></script>
+</head>
+
+<body>
+    <div class="headder-top">
+        <div class="width1200 headder-top-content">
+            <div>欢迎来到信达！ 请<a href="service_login.html" class="font-aqua">登录</a> <a href="service_register.html" class="font-aqua">快速注册 </a>
+            </div>
+        </div>
+    </div>
+    <form id="provideregist" method="post">
+    <ul class="content width1200">
+        <ul class="xinda-logo">
+            <li>
+                <img src="./images/logo-blue.png" alt="">
+            </li>
+            <li>
+                欢迎注册
+            </li>
+        </ul>
+        <h2 class="title">信达服务商端</h2>
+
+        <ul class="main">
+            <ul class="input">
+                <li>
+                    <input name="cellphone" id="cellphone" onblur="checkPhone('cellphone')" type="text" placeholder="请输入手机号">
+                </li>
+                <li>
+                    <input type="text" name="checkCode" class="code" placeholder="请输入验证码">
+                    <img id="captchaimg" src="/api/captcha" >
+                    <script >
+                        var dialog = document.getElementById('captchaimg');
+                        dialog.onclick=function(){
+                            dialog.src="/api/captcha";
+                        }
+                    </script>
+                </li>
+                <li>
+                    <select name="" id="cmbProvince">
+                        <option value="">省</option>
+                    </select>
+                    <select name="" id="cmbCity">
+                        <option value="">市</option>
+                    </select>
+                    <select name="" id="cmbArea">
+                        <option value="">区</option>
+                    </select>
+                </li>
+                <script type="text/javascript">
+                    addressInit("cmbProvince","cmbCity","cmbArea","省","市","区")
+                </script>
+                <li>
+                    <input name="password" id="password" onblur="validateNonEmpty('password','请输入密码')" type="password" placeholder="请设置密码">
+                </li>
+
+                <li>
+                    <p id="regist" class="login-btn font-aqua" >立即注册</p>
+                </li>
+                <script >
+                    var regist = document.getElementById('regist');
+                    regist.onclick=function(){
+                        /* ajax请求 */
+                        var formdata = new FormData($('#provideregist')[0]);
+                        // 省
+                        var cmbProvince=document.getElementById('cmbProvince').value;
+                        // 市
+                        var cmbCity = document.getElementById('cmbCity').value;
+                        // 区
+                        var cmbArea = document.getElementById('cmbArea').value;
+
+                        if (cmbProvince=='省'&&cmbArea=='区'&&cmbCity=='市'){
+                            layer.msg('请选择地区', {icon: 5});
+                            return 0;
+                        }
+                        if (!checkPhone('cellphone')){
+                            return 0;
+                        }
+                        if (!validateNonEmpty('password',"请输入密码")){
+                            return 0;
+                        }
+
+                        formdata.append("region",cmbProvince+"-"+cmbCity+"-"+cmbArea);
+
+                        $.ajax({
+                            url : "/provide/regist",
+                            type : "post",
+                            data : formdata,
+                            dataType : "JSON",
+                            contentType: false,
+                            processData: false,
+                            success : function(data) {
+                                if (data.flag=="注册成功"){
+                                    layer.msg("注册成功，请等待申请通过");
+                                    // alert("注册成功，请等待申请通过");
+                                    window.location.href="/service_login.html";
+                                }else {
+                                    layer.msg(data.flag, {icon: 5});
+                                }
+                            },error:function () {
+                                layer.msg("注册失败");
+                            }
+                        });
+                    };
+                </script>
+            </ul>
+            <ul class="register">
+                <li>已有账号？</li>
+                <li class="font-aqua"><a class=" font-aqua" href="service_login.html">立即登录>></a></li>
+                <li>
+                    <img src="./images/login-man.png" alt="">
+                </li>
+            </ul>
+        </ul>
+    </ul>
+    </form>
+</body>
+
+</html>

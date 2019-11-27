@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/e-commerce_account.css">
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="./css/sweetalert.css">
+    <script src="./js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/layer.js"></script>
+    <script src="./js/check.js"></script>
+    <script>
+        function show(file){
+            var reader = new FileReader();	// 实例化一个FileReader对象，用于读取文件
+            var img = document.getElementById('showimg'); 	// 获取要显示图片的标签
+            //读取File对象的数据
+            reader.onload = function(evt){
+                img.width  =  "80";
+                img.height =  "80";
+                img.src = evt.target.result;
+            };
+            reader.readAsDataURL(file.files[0]);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="headder-top">
+        <div class="width1200 headder-top-content">
+            <script src="./js/quit_login.js"></script>
+            <script src="./js/getCookie.js"></script>
+            <script src="./js/logim_img_name.js"></script>
+            <div><a href="e-commerce_account.html"><span style="cursor:pointer"  id="logname">xx</span></a>&nbsp;&nbsp;&nbsp;欢迎来到信达！<span style="cursor:pointer" onclick="quitLogin()" class="user-quit">[退出]</span></div>
+            <script type="text/javascript">
+                InItLogName();
+            </script>
+            <ul>
+                <li>
+                    <a href="e-commerce_product.html">首页</a>
+                </li>
+                <li><a href="e-commerce_shoping-car.html"><i class="fa fa-shopping-cart fa-lg"></i>
+                    购物车<span id="cartSum">1</span>件</a></li>
+                <script src="./js/e-commerce_cart_sum.js"></script>
+                <script type="text/javascript">
+                    setCartSum();
+                </script>
+                <li> <a href="e-commerce_order.html">
+                        <i class="fa fa-file-text-o fa-lg"></i> 我的订单
+                    </a></li>
+                <li><a href="service_login.html">服务商入口</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="logo-search width1200">
+        <img class="logo" src="./images/logo-blue.png" />
+        <script src="./js/e-commerce_select.js"></script>
+        <ul class="search">
+            <li >
+                <span id="selectspan1" onclick="setstatus('product')" class="search-product font-aqua">产品</span>丨
+                <span id="selectspan2" onclick="setstatus('provider')" class="search-service">服务商</span>
+            </li>
+            <li>
+                <input id="word" placeholder="搜索您需要的服务或服务商" type="text">
+                <span onclick="selectname()" class="search-btn">
+                <i class="fa fa-search fa-2x"></i></span>
+            </li>
+            <li id="popular">
+                热门服务：<span>社保开户</span> <span>公司注册</span>
+            </li>
+
+            <script src="./js/e-commerce_popular.js"></script>
+            <script>e_popular();</script>
+        </ul>
+        <img class="tel" src="./images/xinda-tel.png" alt="">
+    </div>
+    <ul style="height: 30px" class="banner width1200">
+    </ul>
+    <div class="line-aqua"></div>
+    <div class="content width1200">
+        <div class="content-left">
+            <div class="userinfo">
+                <img id="logImg" style="width: 95px;height: 95px" src="./images/user-lg.png" alt="">
+                <p id="logName1">18812345678</p>
+
+                <script type="text/javascript">
+                    InItLogName();
+                </script>
+            </div>
+            <ul class="user-action">
+                <li><a href="e-commerce_order.html"><i class="fa fa-file-text-o fa-lg"></i> 我的订单</a>
+                </li>
+                <li><a href="e-commerce_evaluate.html"><i class="fa fa-pencil-square-o fa-lg"></i>
+                        用户评价</a></li>
+                <li><a class="bg-gray" href="e-commerce_account.html"><i class="fa fa-gear fa-lg"></i> 账户设置</a></li>
+            </ul>
+        </div>
+        <div class="content-right">
+            <ul class="content-banner width1200">
+                <li class="border-b1">账户设置</li>
+                <li>修改密码</li>
+            </ul>
+            <div class="line-aqua"></div>
+            <ul class="change-password">
+                <li>
+                    <span>旧密码：</span>
+                    <input id="oldpassword" onblur="validateNonEmpty('oldpassword','请输入旧密码')" type="text" />
+                </li>
+                <li>
+                    <span>新密码：</span>
+                    <input id="newpassword1" onblur="validateNonEmpty('password1','请输入新密码')" type="password" />
+                </li>
+                <li>
+                    <span>再次输入新密码：</span>
+                    <input id="newpassword2" onblur="validateNonEmpty('password2','请输入新密码')" type="password" />
+                </li>
+                <li>
+                    <p class="save" onclick="sendpassword()">保存</p>
+                </li>
+            </ul>
+            <form id="memberform" enctype="multipart/form-data">
+                <ul class="account-info">
+                    <li>
+                        <span>当前头像：</span>
+                        <img id="showimg" style="width: 80px;height: 80px" src="./images/user-lg.png" alt="">
+                        <input id="file-id" style="width: 70px"  name="file" accept=".gif,.jpg,.png,.bmp,.jpeg,.psd" type="file" onchange="show(this)">
+
+                    </li>
+                    <li>
+                        <span>性别：</span>
+                        <input id="male" onclick="setgendermale()" class="radio" type="radio" name="sex" /> 男
+                        <input id="girl" onclick="setgendergirl()" class="radio" type="radio" name="sex" /> 女
+                    </li>
+                    <li>
+                        <span>姓名：</span>
+                        <input id="name" onblur="validateNonEmpty('name','请输入名字')" name="name" type="text" />
+                    </li>
+                    <li>
+                        <span>邮箱：</span>
+                        <input id="email" onblur="checkeamil('email')" name="email" type="email" />
+                    </li>
+                    <li>
+                        <p onclick="setmemlogin('#memberform')" class="save">保存</p>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+        <script src="./js/e-commerce_account.js"></script>
+        <script src="./js/e-commerce_loginset.js"></script>
+        <script>
+            InItaccount();
+        </script>
+    </div>
+</body>
+
+</html>

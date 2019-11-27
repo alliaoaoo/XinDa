@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <style>
+        .demo li{line-height: 30px;border-bottom: 1px solid #000;}
+        .demo li a{padding: 0 20px;}
+        a:link,a:visited{color:#444;text-decoration:none;}
+        a:hover{color:#ff0000;}
+    </style>
+</head>
+<body>
+<ul id="messlist" class="demo">
+    <li>001 <a href="#" class="up">上移</a><a href="#" class="down">下移</a><a href="#" class="top">置顶</a><a href="#" class="bottom">置底</a></li>
+</ul>
+<script >
+    $.ajax({
+        url:"/provide/ordermessage",
+        type:"get",
+        dataType:"json",
+        success:function (data) {
+            $("#messlist").empty();
+            var strhtml='';
+            for (var i=0;i<data.length;i++){
+                strhtml+='<li  style=font-size:11px>新订单:'+data[i].orderId+" 服务名称:"+data[i].productName+
+                    " 客户名字:"+data[i].memberName+" 客户联系方式："+data[i].memberCellphone+'<a href="#" onclick="delmess(\''+data[i].orderId+'\')">已读</a></li>\n';
+            }
+            $("#messlist").append(strhtml);
+        }
+    })
+</script>
+<script>
+function delmess(id) {
+    $.ajax({
+        url:"/provide/delordermessage",
+        type:"post",
+        dataType:"json",
+        data:{"orderId":id},
+        success:function (data) {
+            location.reload();
+        }
+    })
+}
+</script>
+</body>
+</html>

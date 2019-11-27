@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/service_expenses.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+    <script src="./js/getCookie.js"></script>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="./css/layer.css">
+    <script src="./js/layer.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo_info">
+            <img src="./images/logo.png" alt="logo">
+            <span class="platform_name">信达</span>
+        </div>
+        <ul class="user_info">
+            <li><a href="service_product.html"><i class="fa fa-cog fa-fw"></i>服务管理</a></li>
+            <li onclick="messorderlist()" id="ordersum"><i class="fa fa-shopping-cart fa-fw"></i>新订单(0)</li>
+            <li onclick="messlist()" id="messlist"><i  class="fa fa-bell-o fa-fw"></i>通知(0)</li>
+            <script src="./js/service_message.js"></script>
+            <script>
+                setmesssum();
+                setordersum();
+            </script>
+            <li></li>
+            <li style="width: 20px">
+                <img style="height: 40px;width: 40px;padding-top: 5px;" id="logImg" src="./images/default_user.png">
+            </li>
+            <li>
+                <span id="logname">用户名字</span>
+                <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
+                <ul class="dropdown">
+                    <li><a href="./service_setting.html">更改信息</a></li>
+                    <li ><a href="#" onclick="quitLogin()">退出登录</a></li>
+                </ul>
+            </li>
+            <script src="./js/logim_img_name.js"></script>
+            <script type="text/javascript">
+                InItLogName();
+            </script>
+        </ul>
+    </div>
+    <div class="main">
+        <ul class="main-nav">
+            <li>
+                <a href="service_product.html">
+                    <i class="fa fa-home fa-fw"></i>
+                    <p>主页</p>
+                </a>
+            </li>
+            <li>
+                <a href="service_orderform.html">
+                    <i class="fa fa-shopping-cart fa-fw"></i>
+                    <p>订单</p>
+                </a>
+            </li>
+            <li class="bg-red">
+                <a href="service_expenses.html">
+                    <i class="fa fa-cny fa-fw"></i>
+                    <p>费用</p>
+                </a>
+            </li>
+            <li>
+                <a href="service_store.html">
+                    <i class="fa fa-institution fa-fw"></i>
+                    <p>店铺</p>
+                </a>
+            </li>
+            <li>
+                <a href="service_setting.html">
+                    <i class="fa fa-cog fa-fw"></i>
+                    <p>设置</p>
+                </a>
+            </li>
+        </ul>
+        <div class="main-details">
+            <div class="main-top">
+                <ul>
+                    <li>
+                        <i class="fa fa-home fa-fw"></i>
+                    </li>
+                    <li>费用</li>
+                </ul>
+            </div>
+            <ul class="main-tab">
+                <li class="border-red order1">费用详情</li>
+            </ul>
+            <div class="main-content">
+                <span id="agreesum" class=""></span>
+                <span id="applicationsum" class="not_settled"></span>
+                <span id="platform" class="clsd"></span>
+
+                <p>
+                    <canvas id="canvas_circle" width="600" height="300" style="border:2px solid rgba(255,28,0,0);" >
+                        浏览器不支持canvas
+                    </canvas>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="./js/service_expenses.js"></script>
+    <script>
+        //绘制饼图
+        function drawCircle(canvasId, data_arr, color_arr, text_arr)
+        {
+            var c = document.getElementById(canvasId);
+            var ctx = c.getContext("2d");
+
+            var radius = c.height / 2 - 20; //半径
+            var ox = radius + 20, oy = radius + 20; //圆心
+
+            var width = 30, height = 10; //图例宽和高
+            var posX = ox * 2 + 20, posY = 30;   //
+            var textX = posX + width + 5, textY = posY + 10;
+
+            var startAngle = 0; //起始弧度
+            var endAngle = 0;   //结束弧度
+            for (var i = 0; i < data_arr.length; i++)
+            {
+                //绘制饼图
+                endAngle = endAngle + data_arr[i] * Math.PI * 2; //结束弧度
+                ctx.fillStyle = color_arr[i];
+                ctx.beginPath();
+                ctx.moveTo(ox, oy); //移动到到圆心
+                ctx.arc(ox, oy, radius, startAngle, endAngle, false);
+                ctx.closePath();
+                ctx.fill();
+                startAngle = endAngle; //设置起始弧度
+
+                //绘制比例图及文字
+                ctx.fillStyle = color_arr[i];
+                ctx.fillRect(posX, posY + 20 * i, width, height);
+                ctx.moveTo(posX, posY + 20 * i);
+                ctx.font = 'bold 12px 微软雅黑';    //斜体 30像素 微软雅黑字体
+                ctx.fillStyle = color_arr[i]; //"#000000";
+                var percent = text_arr[i] + "：" + 100 * data_arr[i]+ "%";
+                ctx.fillText(percent, textX, textY + 20 * i);
+            }
+        }
+
+        function init() {
+
+            $.ajax({
+                url:"/api/getexpenses",
+                type:"get",
+                dataType:"json",
+                success:function (data) {
+                    //绘制饼图
+                    //比例数据和颜色
+                    var data_arr = [data.agree, data.application, data.platform];
+                    var color_arr = ["#02ffc9", "#ff0005", "#000000"];
+                    var text_arr = ["所有收益", "待同意订单总费用", "平台抽取费用"];
+
+                    drawCircle("canvas_circle", data_arr, color_arr, text_arr);
+
+                    $("#applicationsum").empty();
+                    $("#applicationsum").append("待同意订单 ："+data.applicationsum+"￥");
+
+                    $("#agreesum").empty();
+                    $("#agreesum").append("已同意订单 ："+data.agreesum+"￥");
+
+                    $("#platform").empty();
+                    $("#platform").append("平台抽取费用 ："+data.platformsum+"￥");
+                }
+            });
+
+        }
+
+        //页面加载时执行init()函数
+        window.onload = init;
+
+    </script>
+</body>
+
+</html>
