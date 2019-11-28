@@ -80,6 +80,7 @@ public class ProductController {
         //从cookie取出服务id
         String productId = (String)GetCookie.getCookie(request,"productId");
 
+        ProviderProduct oldProduct = productService.getProduct(productId);
         try {
             //文件是否非空
             if (file.getSize()!=0) {
@@ -94,6 +95,11 @@ public class ProductController {
             System.out.println(e.getMessage());
         }
 
+        //各种状态
+        product.setStatus(oldProduct.getStatus());
+        product.setRecommend(oldProduct.getRecommend());
+        product.setHighQuality(oldProduct.getHighQuality());
+        product.setStar(oldProduct.getStar());
 
         if (productService.upProduct(product,productId)){
             map.put("flag","成功");
