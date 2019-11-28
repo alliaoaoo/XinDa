@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 27/11/2019 15:33:16
+ Date: 28/11/2019 14:13:56
 */
 
 SET NAMES utf8mb4;
@@ -92,6 +92,9 @@ INSERT INTO `new_order_message` VALUES ('16ea04040d33e282', 'WASIA', '16e123aba8
 INSERT INTO `new_order_message` VALUES ('16ea040424b3e283', 'WASIA', '16e123aba8c33940', '15504603333', '16e20ec5f19f1016', 'TEST');
 INSERT INTO `new_order_message` VALUES ('16ea09bd7ff1ab857', NULL, '16e123aba8c33940', '15504604444', '16e63a1ad5135d44', 'TESTxxxxaaa');
 INSERT INTO `new_order_message` VALUES ('16ea09bd8851ab858', NULL, '16e123aba8c33940', '15504604444', '16e68a9b3bd6d013', 'TEST');
+INSERT INTO `new_order_message` VALUES ('16eafa30fec153c16', 'WASIA', '16e69e9c9116d024', '15504603333', '16ea08b65a81ab84', '彼狡童兮，不与我食兮');
+INSERT INTO `new_order_message` VALUES ('16eafa3103b153c17', 'WASIA', '16e69e9c9116d024', '15504603333', '16ea08d6b9a1ab85', '弃我去者，昨日之日不可留');
+INSERT INTO `new_order_message` VALUES ('16eafa310b1153c18', 'WASIA', '16e69e9c9116d024', '15504603333', '16ea08e78081ab86', '风雨凄凄，鸡鸣喈喈。');
 
 -- ----------------------------
 -- Table structure for product_style
@@ -201,7 +204,7 @@ CREATE TABLE `provider_product`  (
   `REGION` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地区',
   `PRICE` int(22) NULL DEFAULT NULL COMMENT '价格',
   `UNIT` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '单位',
-  `STATUS` int(22) NULL DEFAULT NULL COMMENT '状态（1在线2下线）',
+  `STATUS` int(22) NULL DEFAULT NULL COMMENT '0下线1申请上线2同意3不同意',
   `RECOMMEND` int(22) NULL DEFAULT NULL COMMENT '是否推荐产品',
   `HIGH_QUALITY` int(22) NULL DEFAULT NULL COMMENT '是否创业必备',
   `CREATE_TIME` date NULL DEFAULT NULL COMMENT '创建时间',
@@ -215,19 +218,21 @@ CREATE TABLE `provider_product`  (
 -- ----------------------------
 -- Records of provider_product
 -- ----------------------------
-INSERT INTO `provider_product` VALUES ('16e20ec5f19f1016', '16e123aba8c33940', 'TEST', 'test', '/uploads/16e123aba8c33940/TEST/2019/10/TEST2019103116263290.gif', 'tesst', '青海-西宁市-市辖区', 10002222, 'sdfdsfs', 2, 1, NULL, '2019-10-31', NULL, 'style004', 'type002', 10001);
-INSERT INTO `provider_product` VALUES ('16e20ecd5cdf1017', '16e123aba8c33940', 'TEST', 'sfsadf', '/uploads/16e123aba8c33940/TEST/2019/10/TEST20191031162702477.jpg', 'sdfasf', '新疆-伊犁哈萨克自治州-新源县', 100000, '100000.0', 2, 0, NULL, '2019-10-31', NULL, 'style004', 'type002', 10000);
+INSERT INTO `provider_product` VALUES ('16e20ec5f19f1016', '16e123aba8c33940', 'TEST', 'test', '/uploads/16e123aba8c33940/TEST/2019/10/TEST2019103116263290.gif', 'tesst', '青海-西宁市-市辖区', 10002222, 'sdfdsfs', 1, 1, NULL, '2019-10-31', NULL, 'style004', 'type002', 10001);
+INSERT INTO `provider_product` VALUES ('16e20ecd5cdf1017', '16e123aba8c33940', 'TEST', 'sfsadf', '/uploads/16e123aba8c33940/TEST/2019/10/TEST20191031162702477.jpg', 'sdfasf', '新疆-伊犁哈萨克自治州-新源县', 100000, '100000.0', 1, 0, NULL, '2019-10-31', NULL, 'style004', 'type002', 10000);
 INSERT INTO `provider_product` VALUES ('16e63a1ad5135d44', '16e123aba8c33940', 'TESTxxxxaaa', 'sssss', '/uploads/16e123aba8c33940/TESTxxxxaaa/2019/11/TESTxxxxaaa20191113151930395.gif', 'ssss', '山西-太原市-市辖区', 10002222, 'sdfdsfsaaa', 2, 0, NULL, '2019-11-13', NULL, 'style004', 'type002', 10000);
 INSERT INTO `provider_product` VALUES ('16e68a9b3bd6d013', '16e123aba8c33940', 'TEST', 'xx', '/uploads/16e123aba8c33940/TEST/2019/11/TEST20191114144622542.gif', 'xx', '河北-石家庄市-市辖区', 100000, '0000', 2, 0, NULL, '2019-11-14', NULL, 'style004', 'type001', 10000);
-INSERT INTO `provider_product` VALUES ('16ea006f28d30d43', '16e69e9c9116d024', '大江东去浪淘尽', '啊', '/uploads/16e69e9c9116d024/大江东去浪淘尽/2019/11/大江东去浪淘尽20191125084720207.gif', '波', '内蒙古-鄂尔多斯市-鄂托克前旗', 1000, 'hjhj', 2, 0, NULL, '2019-11-25', NULL, 'style002', 'type001', 100);
-INSERT INTO `provider_product` VALUES ('16ea010721935b81', '16e69e9c9116d024', '千古风流人物', '还看今朝', NULL, '百尺竿头', '宁夏-银川市-市辖区', 1000, 'ASI', 2, 0, NULL, '2019-11-25', NULL, 'style001', 'type002', 100);
-INSERT INTO `provider_product` VALUES ('16ea08ad6e61ab83', '16e69e9c9116d024', '彼狡童兮，不与我言兮', '维子之故，使我不能餐兮！', '/uploads/16e69e9c9116d024/彼狡童兮，不与我言兮/2019/11/彼狡童兮，不与我言兮20191125111123881.gif', '维子之故，使我不能餐兮！', '新疆-乌鲁木齐市-市辖区', 1000, 'AQI', 2, NULL, NULL, '2019-11-25', NULL, 'style003', 'type001', 100);
-INSERT INTO `provider_product` VALUES ('16ea08b65a81ab84', '16e69e9c9116d024', '彼狡童兮，不与我食兮', '维子之故，使我不能息兮', '/uploads/16e69e9c9116d024/彼狡童兮，不与我食兮/2019/11/彼狡童兮，不与我食兮20191125111200425.gif', '维子之故，使我不能息兮', '山西-太原市-市辖区', 10000, 'AQSO', 2, NULL, NULL, '2019-11-25', NULL, 'style004', 'type002', 100);
-INSERT INTO `provider_product` VALUES ('16ea08d6b9a1ab85', '16e69e9c9116d024', '弃我去者，昨日之日不可留', '弃我去者，昨日之日不可留', '/uploads/16e69e9c9116d024/弃我去者，昨日之日不可留/2019/11/弃我去者，昨日之日不可留2019112511141318.gif', '弃我去者，昨日之日不可留', '新疆-和田地区-和田市', 10000, '欧瑞', 2, NULL, NULL, '2019-11-25', NULL, 'style003', 'type002', 100);
-INSERT INTO `provider_product` VALUES ('16ea08e78081ab86', '16e69e9c9116d024', '风雨凄凄，鸡鸣喈喈。', '风雨凄凄，鸡鸣喈喈。', '/uploads/16e69e9c9116d024/风雨凄凄，鸡鸣喈喈。/2019/11/风雨凄凄，鸡鸣喈喈。20191125111521736.gif', '风雨凄凄，鸡鸣喈喈。', '河北-石家庄市-市辖区', 1000, 'GOI', 2, NULL, NULL, '2019-11-25', NULL, 'style001', 'type002', 100);
-INSERT INTO `provider_product` VALUES ('16ea092318e1ab837', '16e69e9c9116d024', '君不见，黄河之水天上来，奔流到海不复回', '君不见，黄河之水天上来，奔流到海不复回', '/uploads/16e69e9c9116d024/君不见，黄河之水天上来，奔流到海不复回/2019/11/君不见，黄河之水天上来，奔流到海不复回20191125111925839.gif', '君不见，黄河之水天上来，奔流到海不复回', '宁夏-银川市-市辖区', 1000, 'SFDS', 2, NULL, NULL, '2019-11-25', NULL, 'style004', 'type001', 100);
-INSERT INTO `provider_product` VALUES ('16ea092e9331ab838', '16e69e9c9116d024', '君不见，高堂明镜悲白发，朝如青丝暮成雪。', '君不见，高堂明镜悲白发，朝如青丝暮成雪。', '/uploads/16e69e9c9116d024/君不见，高堂明镜悲白发，朝如青丝暮成雪。/2019/11/君不见，高堂明镜悲白发，朝如青丝暮成雪。20191125112012852.jpg', '君不见，高堂明镜悲白发，朝如青丝暮成雪。', '山西-太原市-市辖区', 10000, 'BNI', 2, NULL, NULL, '2019-11-25', NULL, 'style004', 'type002', 100);
-INSERT INTO `provider_product` VALUES ('16ea0939abc1ab839', '16e69e9c9116d024', '人生得意须尽欢，莫使金樽空对月。', '人生得意须尽欢，莫使金樽空对月。', '/uploads/16e69e9c9116d024/人生得意须尽欢，莫使金樽空对月。/2019/11/人生得意须尽欢，莫使金樽空对月。20191125112058301.gif', '人生得意须尽欢，莫使金樽空对月。', '新疆-乌鲁木齐市-市辖区', 10000, '人生得意须尽欢，莫使金樽空对月。', 2, NULL, NULL, '2019-11-25', NULL, 'style003', 'type002', 100);
+INSERT INTO `provider_product` VALUES ('16ea006f28d30d43', '16e69e9c9116d024', '大江东去浪淘尽', '啊', '/uploads/16e69e9c9116d024/大江东去浪淘尽/2019/11/大江东去浪淘尽20191128103313265.gif', '波', '内蒙古-鄂尔多斯市-鄂托克前旗', 1000, 'hjhj', 2, NULL, NULL, NULL, NULL, 'style002', 'type002', 100);
+INSERT INTO `provider_product` VALUES ('16ea010721935b81', '16e69e9c9116d024', '千古风流人物', '还看今朝', '/uploads/16e69e9c9116d024/千古风流人物/2019/11/千古风流人物20191128104347905.gif', '百尺竿头', '宁夏-银川市-市辖区', 1000, 'ASI', 2, NULL, NULL, NULL, NULL, 'style001', 'type001', 100);
+INSERT INTO `provider_product` VALUES ('16ea08ad6e61ab83', '16e69e9c9116d024', '彼狡童兮，不与我言兮', '维子之故，使我不能餐兮！', '/uploads/16e69e9c9116d024/彼狡童兮，不与我言兮/2019/11/彼狡童兮，不与我言兮2019112810440766.gif', '维子之故，使我不能餐兮！', '新疆-乌鲁木齐市-市辖区', 1000, 'AQI', 2, NULL, NULL, NULL, NULL, 'style003', 'type002', 100);
+INSERT INTO `provider_product` VALUES ('16ea08b65a81ab84', '16e69e9c9116d024', '彼狡童兮，不与我食兮', '维子之故，使我不能息兮', '/uploads/16e69e9c9116d024/彼狡童兮，不与我食兮/2019/11/彼狡童兮，不与我食兮20191128110201164.gif', '维子之故，使我不能息兮', '山西-太原市-市辖区', 10000, 'AQSO', 2, NULL, NULL, NULL, NULL, 'style004', 'type002', 100);
+INSERT INTO `provider_product` VALUES ('16ea08d6b9a1ab85', '16e69e9c9116d024', '弃我去者，昨日之日不可留', '弃我去者，昨日之日不可留', '/uploads/16e69e9c9116d024/弃我去者，昨日之日不可留/2019/11/弃我去者，昨日之日不可留20191128104421827.gif', '弃我去者，昨日之日不可留', '新疆-和田地区-和田市', 10000, '欧瑞', 2, NULL, NULL, NULL, NULL, 'style003', 'type002', 100);
+INSERT INTO `provider_product` VALUES ('16ea08e78081ab86', '16e69e9c9116d024', '风雨凄凄，鸡鸣喈喈。', '风雨凄凄，鸡鸣喈喈。', '/uploads/16e69e9c9116d024/风雨凄凄，鸡鸣喈喈。/2019/11/风雨凄凄，鸡鸣喈喈。20191128104444595.gif', '风雨凄凄，鸡鸣喈喈。', '河北-石家庄市-市辖区', 1000, 'GOI', 2, NULL, NULL, NULL, NULL, 'style004', 'type001', 100);
+INSERT INTO `provider_product` VALUES ('16ea092318e1ab837', '16e69e9c9116d024', '君不见，黄河之水天上来，奔流到海不复回', '君不见，黄河之水天上来，奔流到海不复回', '/uploads/16e69e9c9116d024/君不见，黄河之水天上来，奔流到海不复回/2019/11/君不见，黄河之水天上来，奔流到海不复回2019112810445795.gif', '君不见，黄河之水天上来，奔流到海不复回', '宁夏-银川市-市辖区', 1000, 'SFDS', 2, NULL, NULL, NULL, NULL, 'style003', 'type002', 100);
+INSERT INTO `provider_product` VALUES ('16ea092e9331ab838', '16e69e9c9116d024', '君不见，高堂明镜悲白发，朝如青丝暮成雪。', '君不见，高堂明镜悲白发，朝如青丝暮成雪。', '/uploads/16e69e9c9116d024/君不见，高堂明镜悲白发，朝如青丝暮成雪。/2019/11/君不见，高堂明镜悲白发，朝如青丝暮成雪。20191128104511322.gif', '君不见，高堂明镜悲白发，朝如青丝暮成雪。', '山西-太原市-市辖区', 10000, 'BNI', 2, NULL, NULL, NULL, NULL, 'style004', 'type002', 100);
+INSERT INTO `provider_product` VALUES ('16ea0939abc1ab839', '16e69e9c9116d024', '人生得意须尽欢，莫使金樽空对月。', '人生得意须尽欢，莫使金樽空对月。', '/uploads/16e69e9c9116d024/人生得意须尽欢，莫使金樽空对月。/2019/11/人生得意须尽欢，莫使金樽空对月。20191128104526647.gif', '人生得意须尽欢，莫使金樽空对月。', '新疆-乌鲁木齐市-市辖区', 10000, '人生得意须尽欢，莫使金樽空对月。', 2, NULL, NULL, NULL, NULL, 'style002', 'type002', 100);
+INSERT INTO `provider_product` VALUES ('16eafe2555e153c26', '16e69e9c9116d024', '击鼓其镗，踊跃用兵。土国城漕，我独南行。', '击鼓其镗，踊跃用兵。土国城漕，我独南行。', '/uploads/16e69e9c9116d024/击鼓其镗，踊跃用兵。土国城漕，我独南行。/2019/11/击鼓其镗，踊跃用兵。土国城漕，我独南行。20191128104116130.jpg', '击鼓其镗，踊跃用兵。土国城漕，我独南行。', '内蒙古-呼和浩特市-市辖区', 1000, '阿法', 0, NULL, NULL, '2019-11-28', NULL, 'style002', 'type001', 100);
+INSERT INTO `provider_product` VALUES ('16eafe3a775153c27', '16e69e9c9116d024', '从孙子仲，平陈与宋。不我以归，忧心有忡。', '从孙子仲，平陈与宋。不我以归，忧心有忡。', '/uploads/16e69e9c9116d024/从孙子仲，平陈与宋。不我以归，忧心有忡。/2019/11/从孙子仲，平陈与宋。不我以归，忧心有忡。20191128104242677.gif', '从孙子仲，平陈与宋。不我以归，忧心有忡。', '内蒙古-呼和浩特市-市辖区', 10000, '100', 0, NULL, NULL, '2019-11-28', NULL, 'style004', 'type002', 100);
 
 -- ----------------------------
 -- Table structure for service_judge
@@ -299,6 +304,9 @@ INSERT INTO `service_order` VALUES ('16ea040424b3e283', '16e356dbf4e33d43', '16e
 INSERT INTO `service_order` VALUES ('16ea09bd7ff1ab857', '16e69dea81c6d021', '16e63a1ad5135d44', 'TESTxxxxaaa', 'sssss', 10002222, 14, 140031108, 3, '2019-11-25', '16e123aba8c33940', 'sdfdsfsaaa');
 INSERT INTO `service_order` VALUES ('16ea09bd8851ab858', '16e69dea81c6d021', '16e68a9b3bd6d013', 'TEST', 'xx', 100000, 13, 1300000, 3, '2019-11-25', '16e123aba8c33940', '0000');
 INSERT INTO `service_order` VALUES ('16ea09bd9071ab859', '16e69dea81c6d021', '16ea006f28d30d43', '大江东去浪淘尽', '啊', 1000, 17, 17000, 3, '2019-11-25', '16e69e9c9116d024', 'hjhj');
+INSERT INTO `service_order` VALUES ('16eafa30fec153c16', '16e356dbf4e33d43', '16ea08b65a81ab84', '彼狡童兮，不与我食兮', '维子之故，使我不能息兮', 10000, 1, 10000, 2, '2019-11-28', '16e69e9c9116d024', 'AQSO');
+INSERT INTO `service_order` VALUES ('16eafa3103b153c17', '16e356dbf4e33d43', '16ea08d6b9a1ab85', '弃我去者，昨日之日不可留', '弃我去者，昨日之日不可留', 10000, 1, 10000, 2, '2019-11-28', '16e69e9c9116d024', '欧瑞');
+INSERT INTO `service_order` VALUES ('16eafa310b1153c18', '16e356dbf4e33d43', '16ea08e78081ab86', '风雨凄凄，鸡鸣喈喈。', '风雨凄凄，鸡鸣喈喈。', 1000, 1, 1000, 2, '2019-11-28', '16e69e9c9116d024', 'GOI');
 
 -- ----------------------------
 -- Table structure for service_order_progress
@@ -336,6 +344,9 @@ INSERT INTO `service_order_progress` VALUES ('16ea040424b3e283', '2019-11-25', '
 INSERT INTO `service_order_progress` VALUES ('16ea09bd7ff1ab857', '2019-11-25', '2019-11-25', '2019-11-25', '2019-11-25', '');
 INSERT INTO `service_order_progress` VALUES ('16ea09bd8851ab858', '2019-11-25', '2019-11-25', '2019-11-25', '2019-11-25', '');
 INSERT INTO `service_order_progress` VALUES ('16ea09bd9071ab859', '2019-11-25', '2019-11-25', '2019-11-25', '2019-11-25', '');
+INSERT INTO `service_order_progress` VALUES ('16eafa30fec153c16', '2019-11-28', NULL, '2019-11-28', NULL, NULL);
+INSERT INTO `service_order_progress` VALUES ('16eafa3103b153c17', '2019-11-28', NULL, '2019-11-28', NULL, NULL);
+INSERT INTO `service_order_progress` VALUES ('16eafa310b1153c18', '2019-11-28', NULL, '2019-11-28', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user
