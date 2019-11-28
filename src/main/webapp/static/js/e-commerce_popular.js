@@ -11,20 +11,23 @@ function e_popular() {
 
                 popular.push(key);
             }
-            var newarr = shuffle(popular);
-            // 取推荐列表中首两项
-            for (var index=0;index<2;index++){
-                if (newarr.length>1){
-                    var jsonkey = popular[index];
-                    htmltext+='<span id="'+data[jsonkey]+'">'+jsonkey+'</span>&nbsp;&nbsp;';
-                }else {
-                    //只有一个时只循环一次
-                    var jsonkey = popular[0];
-                    htmltext+='<span id="'+data[jsonkey]+'">'+jsonkey+'</span>&nbsp;&nbsp;';
-                    break;
+            if (popular.length!=0){
+                var newarr = shuffle(popular);
+                // 取推荐列表中首两项
+                for (var index=0;index<2;index++){
+                    if (newarr.length>1){
+                        var jsonkey = popular[index];
+                        htmltext+='<span id="'+data[jsonkey]+'">'+jsonkey+'</span>&nbsp;&nbsp;';
+                    }else {
+                        //只有一个时只循环一次
+                        var jsonkey = popular[0];
+                        htmltext+='<span id="'+data[jsonkey]+'">'+jsonkey+'</span>&nbsp;&nbsp;';
+                        break;
+                    }
                 }
+                $("#popular").append(htmltext);
             }
-            $("#popular").append(htmltext);
+
         }
     })
 }
