@@ -250,7 +250,7 @@ public class OrderServiceImpl implements OrderService {
             ProviderProductExample.Criteria criteria1 = productExample.createCriteria();
             criteria1.andStyleIdEqualTo(style);
             List<ProviderProduct> productList = productMapper.selectByExample(productExample);
-
+            //获取相关类型的产品的id值
             List <String> productIds=new ArrayList<>();
 
             for (ProviderProduct product:productList){
